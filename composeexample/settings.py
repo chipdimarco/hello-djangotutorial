@@ -9,23 +9,27 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+with open(os.environ['CONFIG_JSON']) as f:
+    data = json.load(f)
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3aemlqs+$!*xn0m1c)llwyq5e*7int=s#!r+kjnop$@@1-nt80'
+SECRET_KEY = data['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = data['DEBUG']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = data['ALLOWED_HOSTS']
 
 
 # Application definition
@@ -76,10 +80,10 @@ WSGI_APPLICATION = 'composeexample.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+        'NAME': data['DATABASES']['default']['NAME'],
+        'USER': data['DATABASES']['default']['USER'],
+        'HOST': data['DATABASES']['default']['HOST'],
+        'PORT': data['DATABASES']['default']['PORT'],
     }
 }
 
