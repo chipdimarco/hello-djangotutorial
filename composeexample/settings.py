@@ -35,6 +35,7 @@ ALLOWED_HOSTS = data['ALLOWED_HOSTS']
 # Application definition
 
 INSTALLED_APPS = [
+    'videlish.apps.VidelishConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
