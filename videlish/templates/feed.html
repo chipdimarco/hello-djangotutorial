@@ -1,9 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="d-inline-flex flex-column border border-primary rounded m-2 p-2">
+    {% include 'createRecipe.html' %}
+</div>
 {% for recipe in recipes %}
     <div class="d-inline-flex flex-column border border-primary rounded m-2 p-2">
         <iframe src="https://www.youtube.com/embed/{{recipe.hostId}}?rel=0&showinfo=0" width="640" height="360" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
         <div>{{recipe.name}}</div>
     </div>
 {% endfor %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    jQuery(document).ready(function () {
+        $('#create-recipe-form').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url:"{% url 'create_recipe' %}",
+                type:'post',
+                data:$('#create-recipe-form').serialize(),
+                success:function(){
+                    alert("it worked");        }
+            });
+        });
+    });
+</script>
 {% endblock %}

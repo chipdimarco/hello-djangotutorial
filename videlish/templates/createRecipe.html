@@ -1,0 +1,8 @@
+
+
+<form id="create-recipe-form" method="post">
+    {% csrf_token %}
+
+    {{ create_recipe_form }}
+    <input type="submit" value="Submit">
+</form>
